@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<widget xmlns="http://www.w3.org/ns/widgets" id="http://www.example.org/clpreview">
+	<name>CL Preview</name>
+	<description>Preview images on Craigslist!</description>
+  	<author email="ninj0x@gmail.com">ninj0x</author>
+  	<icon src="icons/clpreview_256.png"/>
+  	<icon src="icons/clpreview_128.png"/>
+  	<icon src="icons/clpreview_64.png"/>
+  	<icon src="icons/clpreview_18.png"/>
+</widget>
