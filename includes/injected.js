@@ -1,8 +1,6 @@
 // ==UserScript==
 // @include http://*.craigslist.org/*
 // ==/UserScript==
-
-
 function wrapRow(row){
 	var wrapper = document.createElement('div');
 	wrapper.setAttribute('style','margin:10px;');
@@ -17,6 +15,8 @@ function wrapRow(row){
 			var img = document.createElement('img');
 			img.setAttribute('src',urls[url]);
 			img.setAttribute('style','max-height:200px;max-width:200px;margin-left:10px;margin-bottom:10px');
+			img.setAttribute('class', 'clpreview');
+			img.style.display = 'inline';
 			wrapper.appendChild(img);
 		}
 	});
@@ -49,12 +49,29 @@ function parseResponse(response){
 	return imgs;
 }
 
-window.addEventListener( 'DOMContentLoaded', function() {
-	if(document.getElementsByClassName('posting').length) return; // Don't run on individual posts.
-	if(document.URL.search(/(\/search)?\/\w{3}.*/i)>-1){ // Match CL listing pages.
-		var rows = document.getElementsByClassName('row');
-		for(var row = 0; row<rows.length; row++){
-			wrapRow(rows[row]);
-		}
+function switchVis(bool) {
+	var clpreview = document.getElementsByClassName('clpreview');
+	for (var i = clpreview.length - 1; i >= 0; i--) {
+		clpreview[i].style.display = bool?"inline":"none";
 	}
-}, false);
+}
+
+window.opera.defineMagicFunction('showImgs', function(showImgs, realThis){
+	showImgs();
+	if(document.getElementsByClassName('clpreview').length > 0){ // If images are already loaded, just show.
+		switchVis(true);
+		return false;
+	}
+
+	var rows = document.getElementsByClassName('row');
+	for(var row = 0; row<rows.length; row++){
+		wrapRow(rows[row]);
+	}
+	return false;
+});
+
+window.opera.defineMagicFunction('hideImgs', function(hideImgs, realThis){
+	hideImgs();
+	switchVis(false);
+	return false;
+});
