@@ -3,7 +3,6 @@
 	<name>CL Preview</name>
 	<description>Preview images on Craigslist! 
 		Click the 'show images' link on the top left of a listing.</description>
-  	<author email="ninj0x@gmail.com">ninj0x</author>
   	<icon src="icons/clpreview_256.png"/>
   	<icon src="icons/clpreview_128.png"/>
   	<icon src="icons/clpreview_64.png"/>
